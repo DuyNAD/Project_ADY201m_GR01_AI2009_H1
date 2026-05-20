@@ -1,95 +1,99 @@
 # 📋 PHÂN CHIA CÔNG VIỆC CHI TIẾT (TASK BREAKDOWN)
-**Dự án:** Predictive Customer Churn in E-commerce Subscription Services
-**Thời gian thực hiện:** 18/05/2026 – /06/2026
+**Dự án:** Predictive Customer Churn in Telecommunication Services
+**Thời gian thực hiện:** 18/05/2026 – 14/06/2026
 
 ---
 
 ## 👥 THÔNG TIN ĐỘI NHÓM
-*   **Huỳnh Gia Bảo (Team Leader):** Chịu trách nhiệm thiết lập dự án, xử lý logic phức tạp (Feature Engineering, Modeling) và Review code.
-*   **Nguyễn An Duy (Member):** Tập trung vào tiền xử lý dữ liệu (Data Cleaning), trực quan hóa cơ bản và thiết kế Dashboard.
-*   **Nguyễn Hữu Kiệt (Member):** Tập trung vào tổng hợp dữ liệu (Aggregation bằng Pandas), trực quan hóa nâng cao và tổng hợp Insight.
+*   **Huỳnh Gia Bảo (Team Leader):** Chịu trách nhiệm thiết lập dự án, thiết kế schema & pipeline **Microsoft SQL Server**, xử lý logic phức tạp (Feature Engineering, Modeling) và Review code.
+*   **Nguyễn An Duy (Member):** Tập trung vào tiền xử lý dữ liệu (Data Cleaning), truy vấn SQL kiểm tra chất lượng & so sánh nhóm churn, trực quan hóa cơ bản và thiết kế Dashboard.
+*   **Nguyễn Hữu Kiệt (Member):** Tập trung vào truy vấn SQL (Churn Rate, hành vi theo nhóm hợp đồng/dịch vụ), tổng hợp dữ liệu (Aggregation bằng Pandas), trực quan hóa nâng cao và tổng hợp Insight.
 
 ---
 
 ## 📅 LỘ TRÌNH CHI TIẾT THEO SPRINT
 
-### Sprint 1: Khởi tạo dự án & Xử lý dữ liệu thô (18/05 - 25/05)
-**Mục tiêu:** Cài đặt xong môi trường làm việc nhóm, đọc và làm sạch toàn bộ dữ liệu thô.
+### Sprint 1: Khởi tạo dự án, Xử lý dữ liệu thô & Thiết lập SQL (18/05 - 24/05)
+**Mục tiêu:** Cài đặt xong môi trường làm việc nhóm, đọc và làm sạch toàn bộ dữ liệu thô từ bộ *Telco Customer Churn: IBM dataset*, thiết lập **Microsoft SQL Server** phục vụ phân tích.
 
 **1. Huỳnh Gia Bảo**
-*   **Task 1:** Thiết lập GitHub Repository (Tạo file `.gitignore`, `requirements.txt`, thư mục cấu trúc).
-*   **Task 2:** Viết Base Code (Jupyter Notebook) để đọc dữ liệu từ UCI, cấu hình môi trường ảo (`venv`) và viết tài liệu hướng dẫn nhanh cho Duy và Kiệt cài đặt.
-*   *Đầu ra:* Mọi người đều clone được code về máy và chạy được file base thành công.
+*   **Task 1:** Thiết lập GitHub Repository (Tạo file `.gitignore`, `requirements.txt`, thư mục cấu trúc bao gồm `sql/`).
+*   **Task 2:** Viết Base Code (Jupyter Notebook) để đọc dữ liệu Telco từ IBM, cấu hình môi trường ảo (`venv`) và viết tài liệu hướng dẫn nhanh cho Duy và Kiệt cài đặt.
+*   **Task 3 (SQL Server):** Thiết kế schema và tạo database trên **Microsoft SQL Server**:
+    * Cài đặt và sử dụng **Azure Data Studio** / **SSMS**; tạo database dự án.
+    * Viết file DDL T-SQL (`sql/schema.sql`) tạo bảng thông tin **khách hàng** (nhân khẩu học), **hợp đồng & thanh toán**, và **dịch vụ viễn thông**.
+    * Viết script import nạp CSV đã sạch vào SQL Server. Cung cấp file mẫu `sql/.env.example`.
+*   *Đầu ra:* Mọi người clone được code, chạy được file base; database SQL Server và script DDL/import sẵn sàng.
 
 **2. Nguyễn An Duy**
-*   **Task 1:** Thiết lập bảng Trello theo cấu trúc nhóm (Backlog, To Do, In Progress, Review, Done) và tạo các nhãn (Labels) màu sắc.
-*   **Task 2:** Xử lý dữ liệu thiếu (Missing values) và dữ liệu nhiễu/ngoại lệ (Outliers) bằng thư viện `pandas` dựa trên file base của Leader.
-*   *Đầu ra:* File `.csv` hoặc DataFrame đã sạch, không còn giá trị `NaN`, sẵn sàng cho bước phân tích.
+*   **Task 1:** Thiết lập không gian quản lý dự án trên **Notion** (Backlog, To Do, In Progress, Review, Done) và tạo kênh giao tiếp riêng cho nhóm trên **Discord** để đồng bộ tiến độ.
+*   **Task 2:** Xử lý dữ liệu thiếu (Missing values) và ngoại lệ (đặc biệt lưu ý cột `TotalCharges` có thể trống ở khách hàng mới) bằng `pandas`. Mã hóa các biến phân loại (Yes/No, Contract, Payment Method) và chuẩn hóa biến số.
+*   **Task 3 (SQL):** Viết truy vấn SQL kiểm tra chất lượng dữ liệu sau khi import (`sql/data_quality_checks.sql`).
+*   *Đầu ra:* DataFrame đã làm sạch và chuẩn hóa; báo cáo ngắn xác nhận dữ liệu SQL sẵn sàng.
 
 **3. Nguyễn Hữu Kiệt**
-*   **Task 1:** Sử dụng `pandas.groupby()` để tổng hợp dữ liệu (Data Aggregation).
-*   **Task 2:** Tính toán tỷ lệ rời bỏ (Churn Rate) cơ bản phân loại theo thiết bị (Device) và nguồn truy cập (Source).
-*   *Đầu ra:* Các bảng thống kê dạng số (Dataframes) thể hiện rõ nhóm nào có tỷ lệ churn cao nhất.
+*   **Task 1:** Sử dụng `pandas.groupby()` để tổng hợp dữ liệu — khám phá nhanh hành vi tiêu dùng, số tháng gắn bó (`Tenure`) và cước phí.
+*   **Task 2 (SQL):** Viết truy vấn SQL tính **Churn Rate** theo các chiều yêu cầu (`sql/churn_rate_by_segment.sql`):
+    * Theo Loại hợp đồng (Contract).
+    * Theo Phương thức thanh toán (Payment Method).
+    * Theo các gói dịch vụ đi kèm (Internet, Tech Support, Security...).
+*   *Đầu ra:* Các bảng kết quả SQL thể hiện rõ nhóm có tỷ lệ rời bỏ cao nhất.
 
 ---
 
-### Sprint 2: Kỹ nghệ đặc trưng (Feature Engineering) & Trực quan hóa (26/05 - 02/06)
-**Mục tiêu:** Tạo thêm các biến có ý nghĩa và vẽ biểu đồ để tìm ra câu chuyện từ dữ liệu.
+### Sprint 2: Phân tích SQL nâng cao, Kỹ nghệ đặc trưng & Trực quan hóa (25/05 - 31/05)
+**Mục tiêu:** Phác họa hành vi khách hàng viễn thông, tạo biến mới và vẽ biểu đồ đối chiếu giữa nhóm Churn và Non-churn.
 
 **1. Huỳnh Gia Bảo**
-*   **Task 1:** Tạo các biến phức tạp (Feature Engineering) như mức độ tương tác phiên (`session intensity`), hành vi cuối tuần (`weekend behavior`).
-*   **Task 2:** Đọc, góp ý và duyệt (Review & Merge) các Pull Request của Duy và Kiệt trên GitHub.
-*   *Đầu ra:* Bộ dữ liệu hoàn chỉnh cuối cùng đã sẵn sàng để đưa vào huấn luyện mô hình.
+*   **Task 1:** Thực hiện Kỹ nghệ đặc trưng (Feature Engineering) tạo các biến phân tích chuyên sâu bằng Python: `tenure_group` (phân nhóm thời gian sử dụng), `service_diversity` (số lượng dịch vụ phụ trợ), `monthly_charges_ratio`, và `is_paperless_electronic`.
+*   **Task 2 (SQL Server):** Tạo **VIEW** hoặc bảng tổng hợp T-SQL (`sql/feature_summary.sql`) đồng bộ các đặc trưng mới để hỗ trợ modeling.
+*   **Task 3:** Đọc, góp ý và duyệt (Review & Merge) các Pull Request của Duy và Kiệt.
+*   *Đầu ra:* Bộ dữ liệu chuẩn bị sẵn sàng cho thuật toán phân loại.
 
 **2. Nguyễn An Duy**
-*   **Task 1:** Sử dụng thư viện `seaborn` và `matplotlib` để vẽ Bar Chart (Biểu đồ cột) so sánh tỷ lệ churn giữa các nhóm khách hàng.
-*   **Task 2:** Vẽ Boxplot để xem xét sự khác biệt về thời lượng truy cập (`session duration`) giữa nhóm rời bỏ và nhóm ở lại.
-*   *Đầu ra:* Các biểu đồ rõ nét, có tiêu đề và chú thích đầy đủ, được lưu trữ trong thư mục báo cáo.
+*   **Task 1 (SQL):** Viết truy vấn SQL **so sánh hành vi chi tiết** giữa nhóm churn và non-churn (mức cước phí, số tháng gắn bó...).
+*   **Task 2:** Sử dụng `seaborn` / `matplotlib` vẽ **Bar Chart** và **Boxplot** để trực quan hóa sự khác biệt về cước phí hàng tháng (`MonthlyCharges`) và tổng cước (`TotalCharges`) dựa trên kết quả SQL.
+*   *Đầu ra:* File SQL + biểu đồ trực quan có độ tương phản rõ rệt giữa hai nhóm.
 
 **3. Nguyễn Hữu Kiệt**
-*   **Task 1:** Vẽ biểu đồ nhiệt (Correlation Heatmap) để tìm ra các biến có ảnh hưởng mạnh nhất đến nhau và đến tỷ lệ Churn.
-*   **Task 2:** Thực hiện phân tích Cohort (Cohort Analysis) bằng `pandas` và vẽ biểu đồ biểu diễn tỷ lệ giữ chân (Retention) theo thời gian.
-*   *Đầu ra:* Biểu đồ Heatmap và Cohort rõ ràng, kèm theo 2-3 gạch đầu dòng nhận xét bên dưới mỗi biểu đồ trong Notebook.
+*   **Task 1 (SQL):** Viết truy vấn SQL xác định các yếu tố dịch vụ có chênh lệch lớn nhất giữa khách ở lại và khách rời đi (ví dụ: thiếu Tech Support hay Online Security).
+*   **Task 2:** Vẽ **Correlation Heatmap** đánh giá tương quan đa biến và vẽ biểu đồ **Churn theo nhóm Tenure** để tìm điểm gãy trải nghiệm.
+*   *Đầu ra:* Kết quả SQL + Heatmap/Biểu đồ Tenure chỉ ra các biến có ảnh hưởng tiềm năng nhất.
 
 ---
 
-### Sprint 3: Huấn luyện Mô hình & Xây dựng Dashboard (03/06 - 09/06)
-**Mục tiêu:** Xây dựng mô hình máy học dự đoán và tạo giao diện theo dõi cho Business.
+### Sprint 3: Huấn luyện Mô hình & Xây dựng Dashboard (01/06 - 07/06)
+**Mục tiêu:** Xây dựng mô hình phân loại dự đoán tỷ lệ rời bỏ mạng viễn thông và tạo Dashboard báo cáo chiến lược.
 
 **1. Huỳnh Gia Bảo**
-*   **Task 1:** Chia tập dữ liệu (Train/Test Split), huấn luyện 3 mô hình: Logistic Regression, Random Forest, XGBoost.
-*   **Task 2:** Đánh giá mô hình dựa trên Accuracy, Precision, ROC-AUC và đặc biệt tối ưu chỉ số **Recall**. Trích xuất Feature Importance (Biến quan trọng nhất).
-*   *Đầu ra:* Kết quả đánh giá so sánh (Bảng Metrics) và mô hình tốt nhất được chọn.
+*   **Task 1:** Chia tập dữ liệu, triển khai và huấn luyện mô hình Baseline (**Logistic Regression**) với phần phân tích chi tiết các hệ số hồi quy.
+*   **Task 2:** Triển khai các mô hình nâng cao (**Random Forest**, **XGBoost**). Trích xuất danh sách *Feature Importance*.
+*   **Task 3:** Đánh giá hiệu suất tổng thể bằng Accuracy, Precision, Recall, F1-score, ROC-AUC. Tập trung điều chỉnh ngưỡng để **tối ưu hóa chỉ số Recall** (tránh bỏ sót khách hàng có nguy cơ rời đi).
+*   *Đầu ra:* Lựa chọn được mô hình tốt nhất với các chỉ số đánh giá hoàn thiện.
 
 **2. Nguyễn An Duy**
-*   **Task 1:** Xuất file dữ liệu đã làm sạch và đưa vào Power BI hoặc Tableau.
-*   **Task 2:** Kéo thả và thiết kế Dashboard hiển thị: Churn Rate tổng, Phễu chuyển đổi (Conversion funnel), và bộ lọc theo loại thiết bị/tháng.
-*   *Đầu ra:* Một Dashboard có thể tương tác được (file `.pbix` hoặc link Tableau Public).
+*   **Task 1:** Kết nối **Power BI** hoặc **Tableau** trực tiếp tới SQL Server.
+*   **Task 2:** Xây dựng Dashboard bao gồm: Tổng quan Churn Rate, Top risk segments (Nhóm rủi ro cao), Feature importance, và Churn by Service Type.
+*   *Đầu ra:* Dashboard tương tác phục vụ góc nhìn Business cho doanh nghiệp viễn thông.
 
 **3. Nguyễn Hữu Kiệt**
-*   **Task 1:** Đọc kết quả Feature Importance từ mô hình của Bảo và Dashboard của Duy.
-*   **Task 2:** Viết tài liệu tổng hợp (Research Insights): Yếu tố nào làm khách hàng rời bỏ? Nhóm nào rủi ro cao nhất? Doanh nghiệp cần làm gì?
-*   *Đầu ra:* Một file `.md` hoặc Word nháp chứa các gạch đầu dòng phân tích để chuẩn bị đưa vào báo cáo chính thức.
+*   **Task 1:** Tổng hợp kết quả từ *Feature Importance* (Mô hình) và Dashboard để trả lời các câu hỏi nghiên cứu trọng tâm.
+*   **Task 2:** Xây dựng khung đề xuất giải pháp (Actionable insights): Đề xuất kịch bản chuyển đổi hợp đồng Month-to-month sang hợp đồng dài hạn (1-2 năm) và thiết lập hệ thống cảnh báo sớm (Early-warning system) khi `monthly_charges_ratio` tăng cao.
+*   *Đầu ra:* Bản phác thảo Insights chiến lược sẵn sàng cho báo cáo học thuật.
 
 ---
 
-### Sprint 4: Viết Báo cáo chuẩn IEEE (Springer) & Tổng duyệt (10/06 - 15/06)
-**Mục tiêu:** Hoàn thiện báo cáo học thuật (10-12 trang) trên Overleaf và chuẩn bị slide thuyết trình.
+### Sprint 4: Viết Báo cáo & Tổng duyệt (08/06 - 14/06)
+**Mục tiêu:** Hoàn thiện báo cáo học thuật và chuẩn bị trình bày.
 
 **1. Huỳnh Gia Bảo**
-*   **Task 1:** Viết phần **Methodology** (Phương pháp thực hiện) và **Experimental Results** (Kết quả thử nghiệm mô hình) bằng tiếng Anh trên LaTeX.
-*   **Task 2:** Format toàn bộ file LaTeX đảm bảo chuẩn template, không lỗi biên dịch.
+*   **Task 1:** Viết phần **Methodology** và **Experimental Results** (So sánh Logistic Regression, Random Forest, XGBoost).
+*   **Task 2:** Quản lý cấu trúc file LaTeX, đảm bảo format chuẩn IEEE/Springer.
 
 **2. Nguyễn An Duy**
-*   **Task 1:** Viết phần **Introduction** (Giới thiệu bài toán) và **Business Understanding** (Hiểu biết nghiệp vụ) bằng tiếng Anh trên LaTeX.
-*   **Task 2:** Chèn các hình ảnh biểu đồ và Dashboard vào báo cáo LaTeX.
+*   **Task 1:** Viết phần **Introduction** và **Business Understanding** (nhấn mạnh bài toán CAC trong ngành Viễn thông).
+*   **Task 2:** Trích xuất hình ảnh từ Dashboard, chèn biểu đồ và các bảng kết quả SQL vào báo cáo.
 
 **3. Nguyễn Hữu Kiệt**
-*   **Task 1:** Viết phần **Conclusion** (Kết luận và Đề xuất hành động) bằng tiếng Anh trên LaTeX dựa trên phần Insights đã làm ở Sprint 3.
-*   **Task 2:** Thiết kế Slide PowerPoint (hoặc Canva) phục vụ cho buổi thuyết trình bảo vệ dự án.
-
----
-## 📌 LƯU Ý QUAN TRỌNG (Dành cho Duy & Kiệt)
-1. **GitHub:** Luôn tạo nhánh mới (branch) trước khi code. KHÔNG BAO GIỜ tự ý push thẳng lên nhánh `main`. Nhờ Bảo review code trước khi gộp (merge).
-2. **Trello:** Bắt đầu làm task nào thì kéo thẻ (Card) đó sang cột "In Progress". Code xong tạo Pull Request thì kéo sang "Review".
-3. **Môi trường ảo:** Nhớ luôn bật môi trường ảo (`venv`) trước khi mở Jupyter Notebook để tránh xung đột thư viện.
+*   **Task 1:** Viết phần **Conclusion** và các **Đề xuất chiến lược** (Khuyến nghị hành động dựa trên insights dịch vụ và cước phí).
+*   **Task 2:** Thiết kế Slide thuyết trình tổng kết dự án.

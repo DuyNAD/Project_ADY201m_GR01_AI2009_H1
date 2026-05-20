@@ -1,59 +1,62 @@
-# YÊU CẦU DỰ ÁN (PROJECT REQUIREMENTS)
+# PROJECT REQUIREMENTS: Predictive Customer Churn in Telecommunication Services
 
-## Project 1: Predictive Customer Churn in E-commerce Subscription Services
-*(Dự đoán khách hàng rời bỏ trong dịch vụ đăng ký thương mại điện tử)*
+## 1. Mục tiêu Tổng quan (Project Requirements)
+Phân tích các yếu tố khiến khách hàng ngừng sử dụng dịch vụ viễn thông, từ đó xây dựng mô hình học máy dự đoán khả năng rời bỏ (churn) nhằm đề xuất các chiến lược giữ chân khách hàng hiệu quả.
 
 ---
 
-### 1. Mục tiêu (Objectives)
-Phân tích các yếu tố khiến khách hàng ngừng sử dụng dịch vụ, sau đó xây dựng mô hình dự đoán churn để đề xuất chiến lược giữ chân khách hàng hiệu quả.
+## 2. Hiểu biết Kinh doanh & Hướng Tiếp cận (Business Understanding and Analytic Approach)
+* **Vấn đề kinh doanh:** Doanh nghiệp thất thoát doanh thu do khách hàng hủy hợp đồng hoặc rời bỏ dịch vụ sớm. Chi phí tìm kiếm khách hàng mới (CAC) luôn đắt đỏ hơn chi phí chăm sóc khách hàng cũ, do đó giảm thiểu tỷ lệ "Churn" là bài toán tối ưu lợi nhuận trực tiếp nhất trong ngành Viễn thông.
+* **Mục tiêu phân tích:** Xác định chính xác nhóm khách hàng có nguy cơ churn cao và các nguyên nhân cốt lõi dẫn đến quyết định rời đi.
+* **Hướng phân tích:**
+  * Mô tả và phác họa hành vi, đặc điểm tiêu dùng của khách hàng.
+  * Đối chiếu, so sánh đặc điểm giữa hai nhóm: **Churn** (rời bỏ) và **Non-churn** (ở lại).
+  * Xây dựng mô hình phân loại (*Classification model*) để dự đoán xác suất rời đi của từng cá nhân dựa trên dữ liệu lịch sử hợp đồng và cước phí.
+* **Định hướng báo cáo:** Tập trung làm nổi bật hiệu suất dự báo của các mô hình và phân tích sâu các yếu tố có trọng số ảnh hưởng mạnh nhất đến quyết định churn. Đưa ra các gói giải pháp (*actionable insights*) giúp doanh nghiệp can thiệp kịp thời.
 
-### 2. Hiểu biết Kinh doanh & Hướng tiếp cận (Business Understanding and Analytic Approach)
-* **Vấn đề kinh doanh:** Doanh nghiệp mất doanh thu vì khách hàng rời bỏ sớm.
-* **Mục tiêu phân tích:** Xác định nhóm khách hàng có nguy cơ churn cao và lý do chính dẫn đến churn.
-* **Hướng phân tích:** Mô tả hành vi khách hàng, so sánh nhóm churn và không churn, sau đó xây dựng mô hình phân loại (classification).
-* **Kết quả kỳ vọng:** Tập trung vào hiệu quả dự báo và các yếu tố ảnh hưởng mạnh nhất đến churn để trình bày trong bài báo nghiên cứu.
+---
 
-### 3. Câu hỏi Nghiên cứu (Research Questions - RBL)
-1. Yếu tố nào ảnh hưởng mạnh nhất đến xác suất khách hàng churn?
-2. Mô hình nào dự đoán churn tốt nhất giữa **Logistic Regression**, **Random Forest** và **XGBoost**?
-3. Nếu áp dụng mô hình dự đoán churn, doanh nghiệp có thể ưu tiên giữ chân nhóm nào trước để tối ưu hóa nguồn lực?
+## 3. Câu hỏi Nghiên cứu Trọng tâm (Research Questions)
+1. Yếu tố nào tác động mạnh mẽ nhất đến xác suất rời bỏ dịch vụ của khách hàng viễn thông? *(Phân tích Feature Importance)*
+2. Giữa các thuật toán **Logistic Regression** (Baseline), **Random Forest**, và **XGBoost**, mô hình nào đem lại hiệu suất dự đoán chính xác nhất?
+3. Khi áp dụng mô hình vào thực tế, doanh nghiệp nên ưu tiên phân bổ nguồn lực giữ chân nhóm khách hàng nào trước tiên để tối ưu chi phí?
 
-### 4. Thu thập, Hiểu & Chuẩn bị Dữ liệu (Data Collection, Understanding, Preparation)
-* **Dataset:** [UCI Machine Learning Repository - Online Shoppers Purchasing Intention](https://archive.ics.uci.edu/static/public/468/data.csv)
-* **Đặc trưng:** Hành vi duyệt web, thời lượng phiên, số trang đã xem, loại khách, thời điểm truy cập.
-* **Tiền xử lý:**
-    * Làm sạch dữ liệu thiếu, kiểm tra nhiễu (outlier).
-    * Mã hóa biến phân loại và chuẩn hóa biến số.
-* **Kỹ nghệ đặc trưng (Feature Engineering):** Tạo thêm các biến như: `session intensity`, `visit frequency`, `weekend behavior`, `conversion-related features`.
+---
 
-### 5. Phân tích Dữ liệu với SQL
-* **Cấu trúc:** Tạo bảng khách hàng và bảng phiên truy cập.
-* **Truy vấn:**
-    * Tính toán **Churn Rate** theo thiết bị (device), nguồn (source), tháng, hoặc loại khách.
-    * So sánh hành vi chi tiết giữa nhóm churn và không churn.
-    * Truy vấn các yếu tố có tương quan cao nhất với churn để phục vụ phần giải thích nghiên cứu.
+## 4. Thu thập, Hiểu & Chuẩn bị Dữ liệu (Data Collection, Understanding, Preparation)
+* **Nguồn dữ liệu (Dataset):** *Telco Customer Churn: IBM dataset*.
+* **Đặc trưng dữ liệu ban đầu:** * *Thông tin khách hàng:* Giới tính, đối tác (partner), người phụ thuộc (dependents).
+  * *Thông tin dịch vụ:* Internet, Phone, Streaming, Online Security, Tech Support.
+  * *Thông tin tài khoản:* Loại hợp đồng (Contract), Phương thức thanh toán (Payment Method), Chi phí hàng tháng (Monthly Charges), Tổng chi phí (Total Charges), Số tháng gắn bó (Tenure).
+* **Quy trình Tiền xử lý (Data Preparation):**
+  * Làm sạch các giá trị bị thiếu (*missing values*) và xử lý dữ liệu ngoại lai (*outliers*).
+  * Mã hóa các biến phân loại (*Categorical encoding*) và chuẩn hóa các biến số (*Feature scaling/normalization*) nếu cần thiết.
+* **Kỹ nghệ Đặc trưng (Feature Engineering):** Cần tổng hợp và tạo thêm các biến mới có giá trị phân tích cao như:
+  * `tenure_group`: Phân nhóm thời gian sử dụng (Ví dụ: 0-12 tháng, 12-24 tháng...) để tìm điểm gãy trải nghiệm.
+  * `service_diversity`: Số lượng dịch vụ phụ trợ mà khách hàng có đăng ký (để đo độ gắn kết/trung thành).
+  * `monthly_charges_ratio`: Tỷ lệ chi phí tháng so với mức trung bình để tìm ra khách hàng đang trả cước quá cao.
+  * `is_paperless_electronic`: Tổ hợp phương thức nhận hóa đơn điện tử và thanh toán tự động (nhóm này thường ít churn hơn).
 
-### 6. Phân tích Dữ liệu với Python
-* **Thư viện:** Dùng `pandas` để làm sạch/tạo biến; `seaborn`/`matplotlib` để kiểm tra phân phối và tương quan.
-* **Huấn luyện:** Chia tập Train-Test, huấn luyện các mô hình: Logistic Regression, Random Forest, XGBoost.
-* **Đánh giá:** Sử dụng các chỉ số Accuracy, Precision, Recall, F1-score, ROC-AUC.
-* **Ưu tiên:** Tập trung vào chỉ số **Recall** để tránh bỏ sót khách hàng có nguy cơ rời bỏ.
+---
 
-### 7. Trực quan hóa Dữ liệu (Data Visualization)
-* **Bar Chart:** So sánh churn rate theo các nhóm khách hàng.
-* **Boxplot:** Xem xét sự khác biệt về `session duration` giữa nhóm churn và non-churn.
-* **Heatmap:** Kiểm tra mối liên hệ và độ tương quan giữa các biến.
-* **Cohort Chart:** Minh họa hành vi khách hàng và tỷ lệ giữ chân theo thời gian.
+## 5. Kế hoạch Phân tích & Triển khai Kỹ thuật
 
-### 8. Phân tích Hồi quy (Regression Analysis)
-* **Mô hình nền tảng:** Sử dụng **Logistic Regression** (vì biến đích churn là nhị phân).
-* **Diễn giải:** Giải thích các hệ số (coefficients) để làm rõ yếu tố nào làm tăng/giảm xác suất churn.
-* **So sánh:** Đối chiếu với các mô hình mạnh hơn (Random Forest, XGBoost) để chứng minh giá trị cải thiện độ chính xác.
-* **Trình bày:** Làm rõ Baseline model, mô hình nâng cao và bảng so sánh các Metrics.
+### 5.1. Phân tích Dữ liệu với SQL & Python
+* **SQL:** Thiết lập bảng thông tin khách hàng, tính toán Churn Rate theo Loại hợp đồng, Phương thức thanh toán, và các gói dịch vụ đi kèm. Đối chiếu sự khác biệt hành vi.
+* **Python:** Sử dụng `pandas` để xử lý dữ liệu, `seaborn` / `matplotlib` để trực quan hóa (Bar chart, Boxplot, Heatmap, Churn theo nhóm Tenure).
 
-### 9. Phân tích với Công cụ & Dashboard (Data Analysis with Tool)
-* **Triển khai:** Xây dựng Dashboard trên **Power BI** hoặc **Tableau**.
-* **Nội dung:** Hiển thị Churn rate, top risk segments, feature importance, conversion funnel.
-* **Tính năng:** Bộ lọc theo thời gian, nguồn truy cập, loại thiết bị để hỗ trợ ra quyết định nhanh.
-* **Kết luận & Hành động:** Đề xuất các giải pháp thực tiễn như chương trình ưu đãi, Email Remarketing và cá nhân hóa trải nghiệm người dùng.
+### 5.2. Huấn luyện & Đánh giá Mô hình
+
+| Giai đoạn | Chi tiết công việc |
+| :--- | :--- |
+| **Baseline Model** | Sử dụng Logistic Regression. Phân tích chi tiết các hệ số hồi quy (*coefficients*). |
+| **Advanced Models** | Triển khai Random Forest và XGBoost. |
+| **Metrics Đánh giá** | Accuracy, Precision, Recall, F1-score, ROC-AUC. **Ưu tiên tối ưu hóa Recall** để tránh bỏ sót khách hàng có nguy cơ rời đi. |
+
+---
+
+## 6. Xây dựng Dashboard & Đề xuất Chiến lược
+* **Nền tảng:** Power BI hoặc Tableau.
+* **Thành phần:** Tổng quan Churn Rate, Top risk segments (Nhóm rủi ro cao), Feature importance, Churn by Service Type.
+* **Khuyến nghị Hành động (Actionable Insights):** * Đề xuất chuyển đổi từ hợp đồng Month-to-month sang hợp đồng dài hạn (1-2 năm) bằng ưu đãi cước phí.
+  * Thiết lập hệ thống cảnh báo sớm (Early-warning system) khi khách hàng có chỉ số `monthly_charges_ratio` tăng cao để chủ động CSKH tư vấn gói cước tối ưu hơn.
