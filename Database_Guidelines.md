@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feat02-data-processing
 Tuyệt vời! File hướng dẫn chi tiết dành cho các thành viên trong nhóm của bạn đã hoàn thành.
 
 Your MD file is ready
@@ -9,6 +12,7 @@ File Markdown này được tổ chức thành 4 giai đoạn rõ ràng:
 2.  **Cài đặt Extension VS Code**: Các thao tác chuẩn để tìm và cài extension `mssql` của Microsoft.
 3.  **Cấu hình Kết nối**: Cung cấp cả 2 giải pháp (UI nhập liệu và chuỗi Connection String) để dự phòng lỗi phần mềm.
 4.  **Cách chạy T-SQL**: Kèm theo phím tắt (`Ctrl + Shift + E`) và lệnh query mẫu để kiểm tra.
+<<<<<<< HEAD
 5.  **Thông báo quyền hạn**: Nhắc nhở rõ ràng cho thành viên hiểu rằng họ chỉ có quyền đọc (`SELECT`) để không mất công thử chạy các lệnh sửa xóa dữ liệu rồi báo lỗi.
 =======
 # Hướng dẫn Kết nối Database Azure SQL và Sử dụng T-SQL trên VS Code
@@ -90,3 +94,6 @@ Tài khoản của các bạn thành viên nhóm (`member_*`) được phân quy
 - **Quyền hạn được phép:** Thực thi toàn bộ lệnh `SELECT`, viết các câu lệnh Query phức tạp, kết hợp bảng (JOIN), lọc dữ liệu phục vụ quá trình phân tích (Exploratory Data Analysis - EDA) và trích xuất đặc trưng làm sạch dữ liệu (Feature Engineering) cho mô hình AI.
 - **Hành vi bị chặn:** Bạn không thể thực hiện các lệnh làm thay đổi cấu trúc Database (`CREATE`, `ALTER`, `DROP`) hoặc chỉnh sửa/xóa dữ liệu gốc (`INSERT`, `UPDATE`, `DELETE`) trên các bảng chính. Quy định này nhằm đảm bảo tính toàn vẹn dữ liệu cho toàn bộ dự án của nhóm.
 >>>>>>> feat01-docs-project-document
+=======
+5.  **Thông báo quyền hạn**: Nhắc nhở rõ ràng cho thành viên hiểu rằng họ chỉ có quyền đọc (`SELECT`) để không mất công thử chạy các lệnh sửa xóa dữ liệu rồi báo lỗi.
+>>>>>>> feat02-data-processing
