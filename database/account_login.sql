@@ -1,24 +1,20 @@
--- Tạo tài khoản đăng nhập
--- Đảm bảo đang thao tác trên đúng database dự án
-USE Predictive_Customer_Churn_DB;
+-- ==========================================================
+-- 1. XÓA USER CŨ BỊ LỖI (Tránh tình trạng "mồ côi" kết nối)
+-- ==========================================================
+DROP USER IF EXISTS [member_duyna];
+DROP USER IF EXISTS [member_kietnh];
 GO
 
--- ========================================================
--- 1. CẤU HÌNH CHO THÀNH VIÊN KIỆT (member_kietnh)
--- ========================================================
--- Tạo User trong database từ Login hệ thống
+-- ==========================================================
+-- 2. TẠO LẠI USER VÀ NỐI VỚI LOGIN NGOÀI SERVER
+-- ==========================================================
+CREATE USER [member_duyna] FOR LOGIN [member_duyna];
 CREATE USER [member_kietnh] FOR LOGIN [member_kietnh];
 GO
--- Cấp quyền CHỈ ĐỌC VÀ QUERY cho Kiệt
-ALTER ROLE db_datareader ADD MEMBER [member_kietnh];
-GO
 
--- ========================================================
--- 2. CẤU HÌNH CHO THÀNH VIÊN DUY (member_duyna)
--- ========================================================
--- Tạo User trong database từ Login hệ thống
-CREATE USER [member_duyna] FOR LOGIN [member_duyna];
-GO
--- Cấp quyền CHỈ ĐỌC VÀ QUERY cho Duy
+-- ==========================================================
+-- 3. CẤP QUYỀN TRUY CẬP VÀ ĐỌC DỮ LIỆU
+-- ==========================================================
 ALTER ROLE db_datareader ADD MEMBER [member_duyna];
+ALTER ROLE db_datareader ADD MEMBER [member_kietnh];
 GO
