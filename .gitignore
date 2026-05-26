@@ -223,7 +223,6 @@ __marimo__/
 
 # 1. Chặn toàn bộ thư mục dữ liệu (Tuyệt đối không push data lên Git)
 data/
-*.csv
 *.tsv
 *.xlsx
 *.xls
@@ -240,3 +239,27 @@ models/
 *.pbix
 *.twb
 *.twbx
+
+# LaTeX build files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.gz
+*.fls
+*.fdb_latexmk
+<<<<<<< HEAD
+<<<<<<< HEAD
+*.synctex.gz
+# Môi trường
+.env
+=======
+*.synctex.gz
+>>>>>>> feat01-docs-project-document
+=======
+*.synctex.gz
+# Môi trường
+.env
+>>>>>>> feat02-data-processing
